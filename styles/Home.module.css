@@ -1,0 +1,18 @@
+.container {
+  /* background-color: #eaeaea; */
+  width: 100%;
+  height: 100vh;
+}
+
+.main {
+  display: flex;
+  justify-content: space-evenly;
+}
+.content {
+  margin: 24px 16px;
+  padding: 24;
+  height: 82vh;
+}
+.ant-layout .ant-layout-header {
+  background-color: #eaeaea;
+}
