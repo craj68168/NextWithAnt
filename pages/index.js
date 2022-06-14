@@ -1,30 +1,40 @@
-import Head from "next/head";
 import MeetupList from "../components/meetups/MeetupList";
+import Head from "next/head";
 import React from "react";
+import { MongoClient } from "mongodb";
 
-// import { useQuery } from "react-query";
-const data = [
-  {
-    id: "m1",
-    title: "First meetup",
-    image:
-      "https://upload.wikimedia.org/wikipedia/commons/8/8a/Jean_Broc_-_%22Death_of_general_Desaix%22.jpg",
-    address: "Some places",
-    description: "First Meet up ",
-  },
-  {
-    id: "m2",
-    title: "Second meetup",
-    image:
-      "https://upload.wikimedia.org/wikipedia/commons/e/ef/Aragonite_crystal_-_Los_Molinillos%2C_Ceunca%2C_Spain_-_4x3.6x3.5cm_100g.jpg",
-    address: "Some places again",
-    description: "Second Meet up ",
-  },
-];
-export default function Home() {
+export default function Home(props) {
   return (
     <>
-      <MeetupList meetups={data} />
+      <Head>
+        <title>Meet Up</title>
+        <meta name="description" content="next app for beginner"></meta>
+      </Head>
+      <MeetupList meetups={props.meetups} />
     </>
   );
+}
+
+export async function getStaticProps() {
+  const client = await MongoClient.connect(
+    `mongodb+srv://rajchaudhary:staywithme@cluster0.lvls2.mongodb.net/?retryWrites=true&w=majority`
+  );
+  const db = client.db();
+  const meetupsCollection = db.collection("meetups");
+  const result = await meetupsCollection.find().toArray();
+  client.close();
+  return {
+    props: {
+      meetups: result?.length
+        ? result.map(data => ({
+            title: data.title,
+            description: data.description,
+            address: data.address,
+            image: data.image,
+            id: data._id.toString(),
+          }))
+        : [],
+    },
+    revalidate: 10,
+  };
 }
