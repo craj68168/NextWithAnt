@@ -1,6 +1,7 @@
 import Card from "../ui/Card";
 import classes from "./MeetupItem.module.css";
 import { useRouter } from "next/router";
+
 interface MeetupItems {
   id: string;
   image: string;
@@ -10,9 +11,8 @@ interface MeetupItems {
 }
 function MeetupItem(props: MeetupItems) {
   const router = useRouter();
-  const showDetailsHandler = (e: any) => {
-    e.preventDefault();
-    router.push(`/${props.id}`);
+  const showDetailsHandler = (id: string) => {
+    router.push(`/${id}`);
   };
   return (
     <li className={classes.item}>

@@ -44,3 +44,9 @@
 .actions button:active {
   background-color: #ffe2ed;
 }
+
+.containerFluid {
+  display: flex;
+
+  background-color: red;
+}
