@@ -2,10 +2,20 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import { useRouter } from "next/router";
 import Card from "../ui/Card";
-import { Button } from "antd";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import classes from "./NewMeetupForm.module.css";
-
 import { useMutation, useQueryClient } from "react-query";
+
+interface FormikInitalValues {
+  title: string;
+  description: string;
+  image: string;
+  address: string;
+}
+interface Message {
+  message: string;
+}
 const formikSchema = yup.object().shape({
   title: yup.string().required("Title is required"),
   description: yup
@@ -25,19 +35,22 @@ function NewMeetupForm({ onAddMeetup }: any): JSX.Element {
       address: "",
     },
     validationSchema: formikSchema,
-    onSubmit: async (values: any) => {
+    onSubmit: async (values: FormikInitalValues) => {
       await mutateAsync(values);
     },
   });
 
   const cache = useQueryClient();
   const { isLoading, mutateAsync } = useMutation("addNewMeetups", onAddMeetup, {
-    onSuccess: () => {
+    onSuccess: (data: Message) => {
       cache.invalidateQueries("meetupData");
-      router.replace("/");
+      toast.success(data?.message);
+      setTimeout(() => {
+        router.replace("/");
+      }, 1000);
     },
     onError: (err: any) => {
-      console.log(" mutation error", err);
+      toast.error("Something Went Wrong");
     },
   });
 
@@ -107,6 +120,7 @@ function NewMeetupForm({ onAddMeetup }: any): JSX.Element {
           <button disabled={isLoading}>Add Meetup</button>
         </div>
       </form>
+      {/* <ToastContainer position="right-bottom" /> */}
     </Card>
   );
 }

@@ -1,5 +1,4 @@
 import Head from "next/head";
-import Link from "next/link";
 import NewMeetupForm from "../../components/meetups/NewMeetupForm";
 interface FormData {
   title: string;
@@ -17,7 +16,7 @@ const NewMeetup = () => {
       },
     });
     const result = await response.json();
-    console.log("return from mongodb", result);
+    return result;
   };
   return (
     <>
