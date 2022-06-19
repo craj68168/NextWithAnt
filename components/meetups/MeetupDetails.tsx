@@ -5,7 +5,12 @@ interface MeetupItems {
   description: string;
   address: string;
 }
-const MeetupDetails = ({ title, image, description, address }: MeetupItems) => {
+const MeetupDetails = ({
+  title,
+  image,
+  description,
+  address,
+}: MeetupItems): JSX.Element => {
   return (
     <section className={classes.detail}>
       <img src={image} alt={title} />
