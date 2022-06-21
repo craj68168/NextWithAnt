@@ -9,6 +9,7 @@ npm run dev
 # or
 yarn dev
 ```
+yarn install for packages install.
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
