@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import Card from "../ui/Card";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import classes from "./NewMeetupForm.module.css";
+// import classes from "./NewMeetupForm.module.css";
 import { useMutation, useQueryClient } from "react-query";
 import styled from 'styled-components'
 const Form = styled.form`
@@ -96,7 +96,7 @@ function NewMeetupForm({ onAddMeetup }: any): JSX.Element {
   return (
     <Card>
       <Form onSubmit={formik.handleSubmit}>
-        <ControlDiv className={classes.control}>
+        <ControlDiv >
           <label htmlFor="title">Meetup Title</label>
           <input
             type="text"
@@ -111,7 +111,7 @@ function NewMeetupForm({ onAddMeetup }: any): JSX.Element {
               : ""}
           </span>
         </ControlDiv>
-        <ControlDiv className={classes.control}>
+        <ControlDiv >
           <label htmlFor="image">Meetup Image</label>
           <input
             name="image"
@@ -125,7 +125,7 @@ function NewMeetupForm({ onAddMeetup }: any): JSX.Element {
               : ""}
           </span>
         </ControlDiv>
-        <ControlDiv className={classes.control}>
+        <ControlDiv >
           <label htmlFor="address">Address</label>
           <input
             type="text"
@@ -140,7 +140,7 @@ function NewMeetupForm({ onAddMeetup }: any): JSX.Element {
               : ""}
           </span>
         </ControlDiv>
-        <ControlDiv className={classes.control}>
+        <ControlDiv >
           <label htmlFor="description">Description</label>
           <textarea
             id="description"
@@ -155,7 +155,7 @@ function NewMeetupForm({ onAddMeetup }: any): JSX.Element {
               : ""}
           </span>
         </ControlDiv>
-        <ActionDiv className={classes.actions}>
+        <ActionDiv >
           <button disabled={isLoading}>Add Meetup</button>
         </ActionDiv>
       </Form>
