@@ -6,8 +6,47 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import classes from "./NewMeetupForm.module.css";
 import { useMutation, useQueryClient } from "react-query";
+import styled from 'styled-components'
+const Form = styled.form`
+padding: 1rem;
+`
+const ControlDiv = styled.div`
+margin-bottom: 0.5rem;
+& label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+& input, 
+& textarea {
+  display: block;
+  font: inherit;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  padding: 0.25rem;
+  width: 100%;
+}
+`
+const ActionDiv = styled.div`
+margin-top: 1rem;
+  text-align: right;
+  & button {
+    font: inherit;
+    cursor: pointer;
+    background-color: #77002e;
+    color: white;
+    padding: 0.5rem 1.5rem;
+    border: 1px solid #77002e;
+    border-radius: 4px;
+    font-weight: bold;
+  }
 
-interface FormikInitalValues {
+ & button:hover, & button:active {
+  background-color: #a50e48;
+  border-color: #a50e48;
+}
+`
+interface FormikInitalValues { 
   title: string;
   description: string;
   image: string;
@@ -56,8 +95,8 @@ function NewMeetupForm({ onAddMeetup }: any): JSX.Element {
 
   return (
     <Card>
-      <form className={classes.form} onSubmit={formik.handleSubmit}>
-        <div className={classes.control}>
+      <Form onSubmit={formik.handleSubmit}>
+        <ControlDiv className={classes.control}>
           <label htmlFor="title">Meetup Title</label>
           <input
             type="text"
@@ -71,8 +110,8 @@ function NewMeetupForm({ onAddMeetup }: any): JSX.Element {
               ? formik.errors.title
               : ""}
           </span>
-        </div>
-        <div className={classes.control}>
+        </ControlDiv>
+        <ControlDiv className={classes.control}>
           <label htmlFor="image">Meetup Image</label>
           <input
             name="image"
@@ -85,8 +124,8 @@ function NewMeetupForm({ onAddMeetup }: any): JSX.Element {
               ? formik.errors.image
               : ""}
           </span>
-        </div>
-        <div className={classes.control}>
+        </ControlDiv>
+        <ControlDiv className={classes.control}>
           <label htmlFor="address">Address</label>
           <input
             type="text"
@@ -100,8 +139,8 @@ function NewMeetupForm({ onAddMeetup }: any): JSX.Element {
               ? formik.errors.address
               : ""}
           </span>
-        </div>
-        <div className={classes.control}>
+        </ControlDiv>
+        <ControlDiv className={classes.control}>
           <label htmlFor="description">Description</label>
           <textarea
             id="description"
@@ -115,11 +154,11 @@ function NewMeetupForm({ onAddMeetup }: any): JSX.Element {
               ? formik.errors.description
               : ""}
           </span>
-        </div>
-        <div className={classes.actions}>
+        </ControlDiv>
+        <ActionDiv className={classes.actions}>
           <button disabled={isLoading}>Add Meetup</button>
-        </div>
-      </form>
+        </ActionDiv>
+      </Form>
       {/* <ToastContainer position="right-bottom" /> */}
     </Card>
   );
