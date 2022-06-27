@@ -1,13 +1,19 @@
 import MainNavigation from "./MainNavigation";
-import classes from "./Layout.module.css";
+import styled from "styled-components"
+const Main = styled.main`
+{
+  margin: 3rem auto;
+  width: 100%;
+  max-width: 70rem;
+}`
 interface LayoutProps {
   children: React.ReactNode;
 }
-function Layout(props: LayoutProps) {
+function Layout(props: LayoutProps) {  
   return (
     <div>
       <MainNavigation />
-      <main className={classes.main}>{props.children}</main>
+      <Main >{props.children}</Main>
     </div>
   );
 }
