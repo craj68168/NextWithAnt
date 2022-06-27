@@ -39,7 +39,7 @@ const Home = (props: InitialData): JSX.Element => {
   } = useQuery(
     "meetupData",
     fetchData,
-    { initialData: props.meetups },
+    // { initialData: props.meetups },
     {
       onError: (err: any) => {
         toast.error("Something Went Wrong");
@@ -65,25 +65,25 @@ const Home = (props: InitialData): JSX.Element => {
   );
 };
 export default Home;
-export async function getStaticProps() {
-  const client = await MongoClient.connect(process.env.mongoClient);
-  const db = client.db();
-  const meetupsCollection = db.collection("meetups");
-  const result = await meetupsCollection.find().toArray();
-  client.close();
+// export async function getStaticProps() {
+//   const client = await MongoClient.connect(process.env.mongoClient);
+//   const db = client.db();
+//   const meetupsCollection = db.collection("meetups");
+//   const result = await meetupsCollection.find().toArray();
+//   client.close();
 
-  return {
-    props: {
-      meetups: result?.length
-        ? result.map((data: any) => ({
-            title: data?.title,
-            description: data?.description,
-            address: data?.address,
-            image: data?.image,
-            id: data?._id.toString(),
-          }))
-        : [],
-    },
-    revalidate: 1,
-  };
-}
+//   return {
+//     props: {
+//       meetups: result?.length
+//         ? result.map((data: any) => ({
+//             title: data?.title,
+//             description: data?.description,
+//             address: data?.address,
+//             image: data?.image,
+//             id: data?._id.toString(),
+//           }))
+//         : [],
+//     },
+//     revalidate: 1,
+//   };
+// }

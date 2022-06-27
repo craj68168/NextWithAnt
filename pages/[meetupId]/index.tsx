@@ -27,48 +27,27 @@ const DynamicRoutes = (props: MeetupProps) => {
     </>
   );
 };
-// export async function getStaticPaths() {
-//   const client = await MongoClient.connect(process.env.mongoClient);
-//   const db = client.db();
-//   const meetupsCollection = db.collection("meetups");
-//   const result = await meetupsCollection.find({}, { _id: 1 }).toArray();
-//   client.close();
-//   return {
-//     fallback: false,
-//     paths: result?.length
-//       ? result?.map((data: any) => ({
-//           params: {
-//             meetupId: data._id.toString(),
-//           },
-//         }))
-//       : [],
-//   };
-// }
-// export async function getStaticProps(context: GetStaticPropsContext) {
-//   const meetupId = context.params.meetupId;
-//   console.log("meetup id", meetupId);
-
-//   const client = await MongoClient.connect(process.env.mongoClient);
-//   const db = client.db();
-//   const meetupsCollection = db.collection("meetups");
-//   const result = await meetupsCollection.findOne({ _id: ObjectId(meetupId) });
-//   client.close();
-//   return {
-//     props: {
-//       meetupData: {
-//         id: result._id.toString(),
-//         title: result.title,
-//         description: result.description,
-//         address: result.address,
-//         image: result.image,
-//       },
-//     },
-//   };
-// }
-export async function getServerSideProps(context: GetStaticPropsContext){
+export async function getStaticPaths() {
+  const client = await MongoClient.connect(process.env.mongoClient);
+  const db = client.db();
+  const meetupsCollection = db.collection("meetups");
+  const result = await meetupsCollection.find({}, { _id: 1 }).toArray();
+  client.close();
+  return {
+    fallback: false,
+    paths: result?.length
+      ? result?.map((data: any) => ({
+          params: {
+            meetupId: data._id.toString(),
+          },
+        }))
+      : [],
+  };
+}
+export async function getStaticProps(context: GetStaticPropsContext) {
   const meetupId = context.params.meetupId;
-  console.log("meet up",meetupId);
-  
+  console.log("meetup id", meetupId);
+
   const client = await MongoClient.connect(process.env.mongoClient);
   const db = client.db();
   const meetupsCollection = db.collection("meetups");
@@ -77,15 +56,36 @@ export async function getServerSideProps(context: GetStaticPropsContext){
   return {
     props: {
       meetupData: {
-        id: result?._id?.toString(),
-        title: result?.title,
-        description: result?.description,
-        address: result?.address,
-        image: result?.image,
+        id: result._id.toString(),
+        title: result.title,
+        description: result.description,
+        address: result.address,
+        image: result.image,
       },
     },
   };
-
 }
+// export async function getServerSideProps(context: GetStaticPropsContext){
+//   const meetupId = context.params.meetupId;
+//   console.log("meet up",meetupId);
+  
+//   const client = await MongoClient.connect(process.env.mongoClient);
+//   const db = client.db();
+//   const meetupsCollection = db.collection("meetups");
+//   const result = await meetupsCollection.findOne({ _id: ObjectId(meetupId) });
+//   client.close();
+//   return {
+//     props: {
+//       meetupData: {
+//         id: result?._id?.toString(),
+//         title: result?.title,
+//         description: result?.description,
+//         address: result?.address,
+//         image: result?.image,
+//       },
+//     },
+//   };
+
+// }
 
 export default DynamicRoutes;

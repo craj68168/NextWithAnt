@@ -46,7 +46,7 @@ margin-top: 1rem;
   border-color: #a50e48;
 }
 `
-interface FormikInitalValues { 
+interface FormikInitalValues {
   title: string;
   description: string;
   image: string;
