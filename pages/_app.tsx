@@ -5,6 +5,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { QueryClient, QueryClientProvider } from "react-query";
+import { AuthContextProvider } from "../context/AuthContext";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -19,7 +20,7 @@ const MyApp: React.FC = ({ Component, pageProps }: any): JSX.Element => {
       <QueryClientProvider client={queryClient}>
         <Layout>
           <Component {...pageProps} />
-        </Layout>
+        </Layout> 
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
       <ToastContainer position="bottom-right" autoClose={2000} />

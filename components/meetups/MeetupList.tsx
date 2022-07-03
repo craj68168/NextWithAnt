@@ -13,7 +13,7 @@ interface MeetUpProps {
   meetups: MeetupListProps[];
 }
 
-const MeetupList = (props: MeetUpProps) => {
+const MeetupList = (props: MeetUpProps) => { 
   const router = useRouter();
   const showDetailsHandler = (id: string) => {
     router.push(`/${id}`);

@@ -10,7 +10,7 @@ const NewMeetup = () => {
   const addMeetupHandler = async (data: FormData) => {
     const response = await fetch(`/api/new-meetup`, {
       method: "POST",
-      body: JSON.stringify(data),
+      body: JSON.stringify(data), 
       headers: {
         "Content-Type": "application/json",
       },

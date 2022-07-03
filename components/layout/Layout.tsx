@@ -4,16 +4,17 @@ const Main = styled.main`
 {
   margin: 3rem auto;
   width: 100%;
-  max-width: 70rem;
+  max-width: 70rem; 
+  
 }`
-interface LayoutProps {
+interface LayoutProps { 
   children: React.ReactNode;
 }
-function Layout(props: LayoutProps) {  
-  return (
+function Layout(props: LayoutProps) { 
+  return ( 
     <div>
       <MainNavigation />
-      <Main >{props.children}</Main>
+      <Main bg="red">{props.children}</Main>
     </div>
   );
 }

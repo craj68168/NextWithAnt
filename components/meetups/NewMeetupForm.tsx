@@ -15,7 +15,7 @@ margin-bottom: 0.5rem;
 & label {
   display: block;
   font-weight: bold;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.5rem; 
 }
 & input, 
 & textarea {
