@@ -4,13 +4,17 @@ import {AuthContextProvider} from "../../context/AuthContext"
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 const Signup = () => {
-  const {signUp} = AuthContextProvider()
+  const {signUp,user} = AuthContextProvider();
+  console.log("user",user);
   const onFinish = async (values: any) => {
   try {
-    await signUp(values.email,values.password)
+   const data = await signUp(values.email,values.password)
+   toast.success("Signup Successfully");
+   console.log("singup success",data);
+   
    
   } catch (error) {
-    // toast.error(error);
+    toast.error(error);
     console.log("signup error",error);
     
   }

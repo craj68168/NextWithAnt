@@ -2,13 +2,14 @@ import classes from "./MainNavigation.module.css";
 import Link from "next/link";
 import styled from "styled-components"
 import {ThemeProvider} from "styled-components"
+// import {AuthContextProvider} from "../../context/AuthContext"
 const theme = {
   colors:{
     header:"green",
     body:"black"
   }
 }
-const Header = styled.header`
+const Header = styled.header`  
 width: 100%; 
 height: 5rem; 
 display: flex;
@@ -44,14 +45,15 @@ color: white;
 font-weight: bold;
 `
 function MainNavigation() {
+  // const {signUp,user} = AuthContextProvider();
   return (
     <ThemeProvider theme = {theme}>
       <Header>
       <LogoDiv >React Meetups</LogoDiv>
       <nav>
         <ul>
-          <li>  
-            <Link href="/dashboard">All Meetups</Link> 
+       <li>  
+            <Link href="/dashboard">All Meetups</Link>  
           </li>
           <li>
             <Link href="/new-meetup">Add New Meetup</Link>
