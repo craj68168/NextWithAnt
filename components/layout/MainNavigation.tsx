@@ -1,12 +1,14 @@
 import classes from "./MainNavigation.module.css";
 import Link from "next/link";
 import styled from "styled-components"
-import {ThemeProvider} from "styled-components"
-// import {AuthContextProvider} from "../../context/AuthContext"
+import { ThemeProvider } from "styled-components"
+import { useEffect, useState } from "react";
+import { AuthContextProvider } from "../../context/AuthContext"
+import { Router, useRouter } from "../../node_modules/next/router";
 const theme = {
-  colors:{
-    header:"green",
-    body:"black"
+  colors: {
+    header: "green",
+    body: "black"
   }
 }
 const Header = styled.header`  
@@ -16,10 +18,9 @@ display: flex;
 align-items: center;
 justify-content: space-between;
 background-color: #77002e; 
-background-color:${({theme}:any)=>theme.colors.header}
 padding: 0 10%;
  ul {
-  list-style: none;
+  list-style: none; 
   margin: 0;
   padding: 0;
   display: flex;
@@ -38,37 +39,45 @@ li {
 & a.active {
   color: white;  
 }
-`  
+`
 const LogoDiv = styled.div`
 font-size: 1.3rem;
 color: white;
-font-weight: bold;
+font-weight: bold;   
 `
-function MainNavigation() {
-  // const {signUp,user} = AuthContextProvider();
+const MainNavigation = () => {
+  const { user, logout } = AuthContextProvider();
+  const router = useRouter()
+
   return (
-    <ThemeProvider theme = {theme}>
-      <Header>
-      <LogoDiv >React Meetups</LogoDiv>
-      <nav>
-        <ul>
-       <li>  
-            <Link href="/dashboard">All Meetups</Link>  
-          </li>
-          <li>
-            <Link href="/new-meetup">Add New Meetup</Link>
-          </li>
-          <li>
-            <Link href="/hubble">Hubble</Link>
-          </li>
-          <li>
-          <Link href="/login">Login</Link>   
-          </li>
-         <li> <Link href="/signup">Signup</Link></li>
-        </ul>
-      </nav>
-    </Header>
-    </ThemeProvider>
+    <>
+      <header className={classes.header}>
+        <div className={classes.logo}>React Meetups</div>
+        <nav>
+          <ul>
+            {user ? <> <li>
+              <Link href="/dashboard">All Meetups</Link>
+            </li>
+              <li>
+                <Link href="/new-meetup">Add New Meetup</Link>
+              </li>
+              <li> <a  onClick={() => {
+               
+               logout();
+               router.push("/login")
+
+              }}>Logout</a></li>
+            </> : <> <li>
+              <Link href="/login">Login</Link>
+            </li>
+              <li> <Link href="/signup">Signup</Link></li>
+              </>}
+
+
+          </ul>
+        </nav>
+      </header>
+    </>
   );
 }
 

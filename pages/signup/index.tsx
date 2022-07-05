@@ -1,17 +1,20 @@
 import React from 'react'
-import { Button, Checkbox, Form, Input } from 'antd';
+import { Button, Form, Input } from 'antd';
 import {AuthContextProvider} from "../../context/AuthContext"
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import styled from "styled-components"
+const Container = styled.div`
+margin-top:50px;
+text-align:center
+`
 const Signup = () => {
-  const {signUp,user} = AuthContextProvider();
-  console.log("user",user);
+  const {signUp} = AuthContextProvider();
   const onFinish = async (values: any) => {
   try {
    const data = await signUp(values.email,values.password)
    toast.success("Signup Successfully");
    console.log("singup success",data);
-   
    
   } catch (error) {
     toast.error(error);
@@ -27,10 +30,12 @@ const Signup = () => {
 
   
   return (
+    <Container>
+      <title>Signup</title>
     <Form
     name="basic"
     labelCol={{ span: 8 }}
-    wrapperCol={{ span: 16 }}
+    wrapperCol={{ span: 8 }}
     initialValues={{ remember: true }}
     onFinish={onFinish}
     onFinishFailed={onFinishFailed}
@@ -56,12 +61,13 @@ const Signup = () => {
       <Checkbox>Remember me</Checkbox>
     </Form.Item> */}
 
-    <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+    <Form.Item wrapperCol={{ offset: 8, span: 1 }}>
       <Button type="primary" htmlType="submit">
-        Submit
+        Sign up
       </Button>
     </Form.Item>
   </Form>
+  </Container>
 
   )
 }

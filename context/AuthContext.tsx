@@ -1,25 +1,12 @@
-import React, { createContext, useContext, useEffect, useState } from "react"
-import { onAuthStateChanged, createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut } from "firebase/auth"
-import { auth } from "../utils/index";
-// const AuthContext = createContext({})
 
-// export const useAuth = () => useContext(AuthContext);
+import { onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth"
+import { useEffect, useState } from "react";
+import { auth } from "../utils/index";
+
 export const AuthContextProvider = () => {
     const [user, setUser] = useState<any>(null)
-    const [loading, setLoading] = useState(true)
-    useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, (user: any) => {
-            user ? setUser({
-                uid: user.uid,
-                email: user.email,
-                displayName: user.displayName
-            }) : setUser(null)
-            setLoading(false)
-        })
-        return () => unsubscribe()
-    }, [])
-   
-    
+    console.log("user 12345", user);
+
     const signUp = (email: string, password: string) => {
         return createUserWithEmailAndPassword(auth, email, password)
     }
@@ -27,17 +14,31 @@ export const AuthContextProvider = () => {
     const login = (email: string, password: string) => {
         return signInWithEmailAndPassword(auth, email, password)
     }
-    const logout = async ()=>{
-        setUser(null);
-       await signOut(auth)
+    const logout = async () => {
+        setUser(null)
+        await signOut(auth)
     }
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (user: any) => {
+            if (user) {
+                setUser({
+                    uid: user.uid,
+                    email: user.email,
+                    displayName: user.displayName
+                })
+            } else {
+                setUser(null)
+            }
+        })
+
+        return () => unsubscribe()
+    }, [])
+    console.log("user user", user);
+
     return {
+        user,
         signUp,
         login,
         logout,
-        user
-        // <AuthContext.Provider value={{ user,logout,login,signUp }}>
-        //     {loading && children}
-        // </AuthContext.Provider>
     }
 }
