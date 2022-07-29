@@ -1,13 +1,13 @@
 import MeetupList from "../components/meetups/MeetupList";
-import Login from "./login/index";
+import Dashboard from "./dashboard/index";
 
 
 const Home = (): JSX.Element => {
  
   return (
     <>
-   
-      <Login/>
+   <Dashboard/>
+      
      
     </>
   );

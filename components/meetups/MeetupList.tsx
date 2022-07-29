@@ -30,7 +30,7 @@ const MeetupList = (props: MeetUpProps) => {
                     cover={
                       <img
                         alt={meetup.title}
-                        style={{
+                        style={{ 
                           width: "100%",
                           height: "15rem",
                           overflow: "hidden",

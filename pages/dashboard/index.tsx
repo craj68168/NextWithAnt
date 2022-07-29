@@ -6,8 +6,7 @@ import { MongoClient } from "mongodb";
 import { useQuery } from "react-query";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useRouter } from "../../node_modules/next/router";
-import { AuthContextProvider } from "../../context/AuthContext";
+import { useRouter } from "next/router";
 interface ArrayData {
   title: string;
   description: string;
@@ -36,7 +35,6 @@ const fetchData = async () => {
 };
 const Dashboard = (props: InitialData): JSX.Element => {
 
-  const {user } = AuthContextProvider()
   const {
     data: meetupData,
     error,
@@ -55,8 +53,6 @@ const Dashboard = (props: InitialData): JSX.Element => {
     }
   );
   const router = useRouter()
- 
-
 
   return (
     <>
@@ -64,7 +60,7 @@ const Dashboard = (props: InitialData): JSX.Element => {
         <title>Meet Up</title>
         <meta name="description" content="next app for beginner" />
       </Head>
-      {isLoading ? (
+      {isLoading ? ( 
         <MySpinner loading={isLoading} />
       ) : (
         <MeetupList meetups={meetupData} />

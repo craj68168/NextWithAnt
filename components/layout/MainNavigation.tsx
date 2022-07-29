@@ -3,7 +3,6 @@ import Link from "next/link";
 import styled from "styled-components"
 import { ThemeProvider } from "styled-components"
 import { useEffect, useState } from "react";
-import { AuthContextProvider } from "../../context/AuthContext"
 import { Router, useRouter } from "../../node_modules/next/router";
 const theme = {
   colors: {
@@ -46,7 +45,6 @@ color: white;
 font-weight: bold;   
 `
 const MainNavigation = () => {
-  const { user, logout } = AuthContextProvider();
   const router = useRouter()
 
   return (
@@ -55,23 +53,14 @@ const MainNavigation = () => {
         <div className={classes.logo}>React Meetups</div>
         <nav>
           <ul>
-            {user ? <> <li>
+            <> <li>
               <Link href="/dashboard">All Meetups</Link>
             </li>
               <li>
                 <Link href="/new-meetup">Add New Meetup</Link>
               </li>
-              <li> <a  onClick={() => {
-               
-               logout();
-               router.push("/login")
-
-              }}>Logout</a></li>
-            </> : <> <li>
-              <Link href="/login">Login</Link>
-            </li>
-              <li> <Link href="/signup">Signup</Link></li>
-              </>}
+              
+              </>
 
 
           </ul>

@@ -34,6 +34,9 @@
     "yarn": "^1.22.19",
     "yup": "^0.32.11"
   },
+    "resolutions": {
+    "styled-components": "^5"
+  },
   "devDependencies": {
     "eslint": "8.17.0",
     "eslint-config-next": "12.1.6"

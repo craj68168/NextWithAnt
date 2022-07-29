@@ -5,7 +5,6 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { QueryClient, QueryClientProvider } from "react-query";
-import { AuthContextProvider } from "../context/AuthContext";
 
 const queryClient = new QueryClient({
   defaultOptions: {
